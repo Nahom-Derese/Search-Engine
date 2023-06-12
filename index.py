@@ -4,6 +4,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from collections import defaultdict
+import math
 
 # nltk.download('punkt')
 # nltk.download('stopwords')
@@ -41,11 +42,6 @@ for filename in os.listdir(doc_dir):
             inverted_index[term].append((filename, para_num))
         para_num += 1
 
-
-# Print the inverted index
-for term, doc_para_ids in inverted_index.items():
-    print(f'{term}: {doc_para_ids}')
-    
 # Define a function to search for documents that match a query and rank them by cosine similarity
 def search(query):
     # Tokenize, remove stop words, and stem the query terms
@@ -103,9 +99,10 @@ def search(query):
     return results
 
 # Example query
-query = "example sentences"
+query = "Joel felt that"
 
-# Search for matching documents and rank them by cosine similarityresults = search(query)
+# Search for matching documents and rank them by cosine similarity
+results = search(query)
 
 # Print the results
 for doc_id, score in results:
